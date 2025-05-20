@@ -1,0 +1,132 @@
+﻿@using APPLE_STORE.Models;
+@model List<GioHang>
+
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f5f9f9;
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+    .img-thumbnail {
+        object-fit: cover;
+        height: 100px;
+        width: 100px;
+    }
+
+    .totals {
+        font-weight: bold;
+        color: #d32f2f;
+        font-size: 20px;
+        text-align: right;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">THÔNG TIN GIỎ HÀNG</h2>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center">Mã SP</th>
+                    <th class="text-center">Tên Sản Phẩm</th>
+                    <th class="text-center">Ảnh</th>
+                    <th class="text-center">Số Lượng</th>
+                    <th class="text-center">Đơn Giá</th>
+                    <th class="text-center">Thành Tiền</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center align-middle">@item.MaSanPham</td>
+                        <td class="align-middle">@item.TenSanPham</td>
+                        <td class="text-center align-middle">
+                            <img src="@Url.Content("~/Images/" + item.HinhAnh)"
+                                 onerror="this.src='~/Images/no-image.png';"
+                                 class="img-thumbnail"
+                                 alt="@item.TenSanPham">
+                        </td>
+                        <td class="text-center align-middle">
+                            @using (Html.BeginForm("CapNhatGioHang", "GioHang", FormMethod.Post))
+                            {
+                                @Html.Hidden("MaSanPham", item.MaSanPham)
+                                <input type="number" min="1" name="txtSoLuong" value="@item.SoLuong" class="form-control mt-2" />
+                                <button type="submit" class="btn btn-warning btn-sm mt-2">Cập nhật</button>
+                            }
+                        </td>
+
+                        <td class="text-center align-middle">
+                            @string.Format("{0:#,##0,0 VNĐ}", item.Gia)
+                        </td>
+                        <td class="text-center align-middle">
+                            @string.Format("{0:#,##0,0 VNĐ}", item.dThanhTien)
+                        </td>
+                        <td class="text-center align-middle">
+                            <a href="@Url.Action("ProductDetails", "Home", new { id = item.MaSanPham })"
+                               class="btn btn-info btn-sm mt-1 mb-1 d-block">Chi tiết</a>
+                            <a href="@Url.Action("XoaSPKhoiGioHang", "GioHang", new { MaSanPham = item.MaSanPham })"
+                               class="btn btn-danger btn-sm mt-1 mb-1 d-block"
+                               onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?');">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="font-weight-bold text-right pr-4">Tổng Số Lượng:</td>
+                    <td class="font-weight-bold">@ViewBag.TongSoLuong</td>
+                    <td colspan="3" class="text-center font-weight-bold text-danger">
+                        Tổng Tiền: @string.Format("{0:#,##0,0 VNĐ}", ViewBag.TongTien)
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="@Url.Action("XoaGioHang", "GioHang")"
+               class="btn btn-danger btn-lg text-white"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?');">Xóa Giỏ Hàng</a>
+            <a href="@Url.Action("DatHang", "GioHang")"
+               class="btn btn-primary btn-lg text-white">ĐẶT HÀNG</a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4">
+            Giỏ hàng trống! Hãy thêm sản phẩm vào giỏ hàng để tiếp tục mua sắm.
+        </div>
+    }
+</div>

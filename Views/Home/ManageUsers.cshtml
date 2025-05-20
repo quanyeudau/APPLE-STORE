@@ -1,0 +1,29 @@
+﻿@model IEnumerable<APPLE_STORE.Models.TaiKhoan>
+@{
+    ViewBag.Title = "Manage Users";
+}
+<h2>Manage Users</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.IdTaiKhoan</td>
+                <td>@user.TenTaiKhoan</td>
+                <td>@user.Email</td>
+                <td>
+                    <a href="@Url.Action("EditUser", "Home", new { id = user.IdTaiKhoan })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("DeleteUser", "Home", new { id = user.IdTaiKhoan })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

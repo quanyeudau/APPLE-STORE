@@ -1,0 +1,125 @@
+﻿@{
+    var allProducts = ViewBag.AllProducts as List<APPLE_STORE.Models.SanPham>;
+
+    // Phân loại sản phẩm theo Danh Mục
+    var groupedProducts = allProducts.GroupBy(p => p.DanhMuc.Ten); // Giả sử 'DanhMuc.Ten' là tên của danh mục sản phẩm
+}
+
+<h2 class="mt-4 text-center">Danh sách sản phẩm</h2>
+
+@foreach (var group in groupedProducts)
+{
+    <div class="category-section">
+        <!-- Tiêu đề danh mục (iPhone, iPad, MacBook, ...) -->
+        <h3 class="category-title mt-4">@group.Key</h3>
+
+        <div class="row">
+            @foreach (var product in group)
+            {
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card">
+                        <!-- Hình ảnh sản phẩm (bấm vào để xem chi tiết) -->
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })">
+                            <img src="@Url.Content("~/Images/" + product.HinhAnh)" class="card-img-top" alt="@product.Ten">
+                        </a>
+                        <div class="card-body">
+                            <!-- Tên sản phẩm -->
+                            <h5 class="card-title">@product.Ten</h5>
+
+                            <!-- Giá sản phẩm -->
+                            <p class="card-text">
+                                @product.Gia.ToString("C0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"))
+                            </p>
+
+                            <!-- Hiển thị đánh giá 5 sao -->
+                            <div class="star-rating">
+                                <span>&#9733;</span>
+                                <span>&#9733;</span>
+                                <span>&#9733;</span>
+                                <span>&#9733;</span>
+                                <span>&#9733;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<style>
+    /* Tiêu đề danh mục */
+    .category-section {
+        margin-bottom: 40px;
+    }
+
+    .category-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+        border-bottom: 2px solid #007bff; /* Viền dưới màu xanh cho tiêu đề */
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* Card sản phẩm */
+    .product-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+    /* Hình ảnh sản phẩm */
+    .card-img-top {
+        object-fit: cover;
+        height: 150px; /* Giảm kích thước hình ảnh */
+        max-height: 150px; /* Giới hạn chiều cao tối đa */
+        width: 100%;
+        border-bottom: 2px solid #ddd;
+        cursor: pointer; /* Thêm hiệu ứng con trỏ tay khi hover */
+    }
+
+    /* Tên sản phẩm */
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* Giá sản phẩm */
+    .card-text {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #28a745;
+        text-align: center;
+    }
+
+    /* Đánh giá 5 sao */
+    .star-rating {
+        text-align: center;
+        color: #FFD700; /* Màu vàng cho ngôi sao */
+        font-size: 1.2rem;
+    }
+
+    /* Cột sản phẩm */
+    .row {
+        display: flex;
+        flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ không gian */
+        justify-content: center; /* Căn giữa các sản phẩm */
+        gap: 15px; /* Khoảng cách giữa các cột */
+    }
+
+    .col-md-3,
+    .col-sm-6 {
+        flex: 0 0 auto;
+        width: 220px; /* Đặt chiều rộng cố định cho mỗi sản phẩm */
+    }
+</style>

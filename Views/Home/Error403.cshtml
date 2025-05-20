@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "403 - Không có quyền truy cập";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .error-container {
+        text-align: center;
+        margin-top: 100px;
+    }
+
+    .error-code {
+        font-size: 120px;
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .error-message {
+        font-size: 32px;
+        margin-top: 20px;
+        color: #333;
+    }
+
+    .error-description {
+        margin-top: 10px;
+        font-size: 18px;
+        color: #666;
+    }
+
+    .back-button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 12px 30px;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 18px;
+        transition: background-color 0.3s;
+    }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+</style>
+
+<div class="error-container">
+    <div class="error-code">403</div>
+    <div class="error-message">Bạn không có quyền truy cập!</div>
+    <div class="error-description">
+        Trang bạn yêu cầu yêu cầu quyền truy cập cao hơn. <br />
+        Vui lòng đăng nhập bằng tài khoản Admin hoặc trở về trang chủ.
+    </div>
+    <a class="back-button" href="@Url.Action("Index", "Home")">Quay về Trang chủ</a>
+</div>

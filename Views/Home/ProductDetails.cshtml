@@ -1,0 +1,132 @@
+﻿@model APPLE_STORE.Models.SanPham
+
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<h2 class="product-title">@Model.Ten</h2>
+
+<div class="row product-detail">
+    <!-- Hình ảnh sản phẩm -->
+    <div class="col-md-6">
+        <img src="@Url.Content("~/Images/" + Model.HinhAnh)" alt="@Model.Ten" class="img-fluid product-image" />
+    </div>
+
+    <!-- Chi tiết sản phẩm -->
+    <div class="col-md-6">
+        <div class="product-info">
+            <h3 class="product-price">@Model.Gia.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"))</h3>
+            <p class="product-description">@Model.MoTa</p>
+
+            <!-- Giới thiệu sản phẩm -->
+            <div class="product-introduction">
+                <h4>Giới thiệu sản phẩm</h4>
+                <p>Đây là một sản phẩm tuyệt vời với chất lượng vượt trội, được thiết kế với công nghệ tiên tiến và vật liệu bền bỉ, mang lại hiệu suất cao và trải nghiệm tuyệt vời cho người dùng.</p>
+            </div>
+
+            <!-- Nút Thêm vào giỏ hàng -->
+            <div class="add-to-cart">
+                <a href="@Url.Action("ThemGioHang", "GioHang", new { id = Model.Id })"
+                   class="btn btn-primary btn-add-to-cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon-cart">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.879 1.757a2 2 0 001.742 1.243H19a1 1 0 011 1v2a1 1 0 01-1 1H7.621a1 1 0 00-.964.736L5.379 14H20a1 1 0 01.894 1.447l-3.6 7.2a1 1 0 01-.894.553H6a1 1 0 01-.894-.553L1.506 7.6a1 1 0 01.494-1.232L4 4h-.621a2 2 0 01-1.742-1.243L3 3z" />
+                    </svg>
+                    Thêm vào giỏ hàng
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Cấu trúc phần chi tiết sản phẩm */
+    .product-detail {
+        margin-top: 30px;
+    }
+
+    .product-title {
+        font-size: 2rem;
+        color: #4c4c4c;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .product-info {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hiệu ứng hình ảnh sản phẩm */
+    .product-image {
+        width: 80%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+    /* Giá sản phẩm */
+    .product-price {
+        font-size: 2rem;
+        color: #ff6f61;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Mô tả sản phẩm */
+    .product-description {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    /* Giới thiệu sản phẩm */
+    .product-introduction {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+        .product-introduction h4 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+    /* Nút Thêm vào giỏ hàng */
+    .btn-add-to-cart {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    }
+
+        .btn-add-to-cart:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+    .icon-cart {
+        margin-right: 8px;
+        width: 20px;
+        height: 20px;
+    }
+</style>

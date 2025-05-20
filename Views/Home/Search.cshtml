@@ -1,0 +1,27 @@
+﻿@model List<APPLE_STORE.Models.SanPham>
+
+<h2>Kết quả tìm kiếm</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@product.HinhAnh" class="card-img-top" alt="@product.Ten" />
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Ten</h5>
+                        <p class="card-text">@product.MoTa</p>
+                        <p class="text-success">@String.Format("{0:C}", product.Gia)</p>
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Không tìm thấy sản phẩm nào khớp với từ khóa!</p>
+}

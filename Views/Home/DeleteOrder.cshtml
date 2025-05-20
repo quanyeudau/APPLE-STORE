@@ -1,0 +1,17 @@
+﻿@model APPLE_STORE.Models.DonHang
+
+@{
+    ViewBag.Title = "Delete Order";
+}
+
+<h2>Are you sure you want to delete this order?</h2>
+
+<p>Order ID: @Model.Id</p>
+<p>Order Date: @Model.NgayDat</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Yes, delete</button>
+    <a href="@Url.Action("ManageOrders")" class="btn btn-secondary">Cancel</a>
+}

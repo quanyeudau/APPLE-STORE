@@ -1,0 +1,30 @@
+﻿@model IEnumerable<APPLE_STORE.Models.SanPham>
+@{
+    ViewBag.Title = "Manage Products";
+}
+<h2>Manage Products</h2>
+<a href="@Url.Action("CreateProduct", "Home")" class="btn btn-warning">Create</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Ten</td>
+                <td>@product.Gia</td>
+                <td>
+                    <a href="@Url.Action("EditProduct", "Home", new { id = product.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("DeleteProduct", "Home", new { id = product.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

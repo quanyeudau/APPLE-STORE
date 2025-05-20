@@ -1,0 +1,23 @@
+﻿@model IEnumerable<APPLE_STORE.Models.SanPham>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+}
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <!-- Hình ảnh với kích thước nhỏ hơn -->
+                <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })">
+                    <img src="@Url.Content("~/Images/" + product.HinhAnh)" alt="@product.Ten" class="card-img-top" style="width: 100%; height: 200px; object-fit: cover;" />
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">@product.Ten</h5>
+                    <p class="card-text">@product.MoTa</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

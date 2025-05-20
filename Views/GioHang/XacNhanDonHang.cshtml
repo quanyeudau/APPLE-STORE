@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Xác Nhận Đơn Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Cấu hình chung cho trang */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        padding: 30px 0;
+    }
+
+    /* Định dạng cho tiêu đề */
+    h2 {
+        text-align: center;
+        color: #28a745;
+        font-size: 36px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    /* Định dạng cho đoạn văn thông báo */
+    p {
+        text-align: center;
+        font-size: 18px;
+        color: #007bff;
+        margin-top: 10px;
+    }
+
+    /* Thêm một hiệu ứng cho trang */
+    .confirmation-box {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* Thêm một hiệu ứng khi di chuột vào các đoạn văn */
+    p:hover {
+        color: #0056b3;
+        cursor: pointer;
+    }
+
+    /* Định dạng cho các nút */
+    .btn-primary {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Thêm hiệu ứng cho nút khi di chuột */
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="confirmation-box">
+    <h2>CẢM ƠN BẠN ĐÃ ĐẶT HÀNG!</h2>
+    <p>Đơn hàng của bạn đã được đặt thành công. Chúng tôi sẽ xử lý trong thời gian sớm nhất.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn-primary">Trở Về Trang Chủ</a>
+</div>

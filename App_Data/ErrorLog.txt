@@ -1,0 +1,9 @@
+2025-04-27 10:16:26 - Error Message: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. For more information, go to
+Stack Trace:    at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at APPLE_STORE.Controllers.HomeController.SendConfirmationEmail(String email) in D:\file tu trinh duyet\lấy đồ án cũ cô chi làm\APPLE STORE\APPLE STORE\APPLE STORE\Controllers\HomeController.cs:line 302
+   at APPLE_STORE.Controllers.HomeController.Register(String tenTaiKhoan, String matKhau, String email, String hoTen, String diaChi, String soDienThoai) in D:\file tu trinh duyet\lấy đồ án cũ cô chi làm\APPLE STORE\APPLE STORE\APPLE STORE\Controllers\HomeController.cs:line 239
+Inner Exception: Không có thông tin lỗi chi tiết.
+

@@ -1,0 +1,22 @@
+﻿@model APPLE_STORE.Models.SanPham
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ten)
+        @Html.EditorFor(m => m.Ten)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gia)
+        @Html.EditorFor(m => m.Gia)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}

@@ -1,0 +1,199 @@
+﻿@model IEnumerable<APPLE_STORE.Models.SanPham>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Danh Sách Sản Phẩm</h2>
+
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="@Url.Content("~/Images/" + product.HinhAnh)" class="card-img-top" alt="@product.Ten">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Ten</h5>
+                        <p class="card-text">@product.MoTa</p>
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary">Xem Chi Tiết</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Phân Trang -->
+    <nav aria-label="Product pagination" class="d-flex justify-content-center">
+        <ul class="pagination">
+            <!-- Nút Previous -->
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Product", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+            }
+
+            <!-- Các số trang -->
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                if (i == ViewBag.CurrentPage)
+                {
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Product", new { page = i })">@i</a>
+                    </li>
+                }
+            }
+
+            <!-- Nút Next -->
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Product", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+<style>
+    /* Wrapper for the product carousel */
+    .product-carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        margin: 20px 0;
+    }
+
+    /* Horizontal scrolling area for products */
+    .product-carousel {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 10px; /* Giảm khoảng cách giữa các sản phẩm */
+    }
+
+    .product-card {
+        flex-shrink: 0;
+        width: 200px; /* Thu nhỏ kích thước sản phẩm */
+    }
+
+    /* Product card styling */
+    .card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* Nhẹ hơn */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            transform: translateY(-5px); /* Giảm hover effect */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image styling */
+        .card img {
+            width: 100%;
+            height: 150px; /* Fix chiều cao hình ảnh nhỏ hơn */
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover img {
+            transform: scale(1.05); /* Nhẹ hơn khi hover */
+        }
+
+    /* Card content styling */
+    .card-body {
+        padding: 15px; /* Giảm padding */
+        text-align: center;
+        background-color: #ffffff; /* Sáng hơn */
+        border-top: 1px solid #f0f0f0; /* Thêm đường phân cách nhẹ */
+    }
+
+        /* Product title */
+        .card-body .card-title {
+            font-size: 1rem; /* Nhỏ hơn */
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        /* Product description */
+        .card-body .card-text {
+            color: #666;
+            font-size: 0.85rem; /* Nhỏ hơn */
+            margin-bottom: 10px;
+        }
+
+        /* Button styling */
+        .card-body .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9rem; /* Nhỏ hơn */
+            text-transform: uppercase;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+            .card-body .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+                transform: scale(1.03); /* Nhẹ hơn */
+            }
+
+    /* Carousel controls */
+    .carousel-controls {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+        .carousel-controls a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+            .carousel-controls a:hover {
+                background-color: #007bff;
+                color: white;
+            }
+
+        /* Page information styling */
+        .carousel-controls span {
+            font-size: 1rem; /* Giảm kích thước font */
+            color: #333;
+            margin: 0 8px;
+        }
+</style>

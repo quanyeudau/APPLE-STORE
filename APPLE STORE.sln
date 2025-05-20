@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APPLE STORE", "APPLE STORE.csproj", "{18895BA9-0603-4266-844D-26A17E76B44B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18895BA9-0603-4266-844D-26A17E76B44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18895BA9-0603-4266-844D-26A17E76B44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18895BA9-0603-4266-844D-26A17E76B44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18895BA9-0603-4266-844D-26A17E76B44B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03A38C99-1786-47C4-8AC3-E2A1B71057F6}
+	EndGlobalSection
+EndGlobal

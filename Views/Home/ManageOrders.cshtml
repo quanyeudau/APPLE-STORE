@@ -1,0 +1,31 @@
+﻿@model IEnumerable<APPLE_STORE.Models.DonHang>
+@{
+    ViewBag.Title = "Manage Orders";
+}
+<h2>Manage Orders</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.TenNguoiNhan</td>
+                <td>@order.TrangThai</td>
+                <td>@order.TongGia</td>
+                <td>
+                    <a href="@Url.Action("EditOrder", "Home", new { id = order.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("DeleteOrder", "Home", new { id = order.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

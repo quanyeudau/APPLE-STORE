@@ -1,0 +1,172 @@
+﻿@using APPLE_STORE.Models
+@{
+    ViewBag.Title = "ĐƠN ĐẶT HÀNG";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-bottom: 20px;">THÔNG TIN ĐƠN HÀNG</h2>
+
+<!-- Bảng Thông tin sản phẩm -->
+<table align="center" border="1" style="border-collapse: collapse; width: 80%;">
+    <thead>
+        <tr style="text-align:center; font-weight:bold; background-color: #f2f2f2;">
+            <th>Mã Sản Phẩm</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Ảnh Bìa</th>
+            <th>Số Lượng</th>
+            <th>Đơn Giá</th>
+            <th>Thành Tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="text-align:center;">
+                <td align="center">@item.MaSanPham,</td>
+                <td>@item.TenSanPham</td>
+                <td>
+                    <img src="~/Images/@item.HinhAnh" style="width:100px; height:auto;" />
+                </td>
+                <td align="center">@item.SoLuong</td>
+                <td align="center">@string.Format("{0:#,##0}", item.Gia)</td>
+                <td align="center">@string.Format("{0:#,##0}", item.dThanhTien)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Tổng số lượng và Tổng tiền -->
+<table align="center" style="margin-top: 10px; width: 80%;">
+    <tr>
+        <td style="text-align:right; color:red; font-weight:bold; padding-right:10px;">
+            Số lượng sản phẩm: @string.Format("{0:#,##0}", ViewBag.TongSoLuong)
+        </td>
+        <td style="text-align:right; color:red; font-weight:bold;">
+            Tổng tiền: @string.Format("{0:#,##0}", ViewBag.TongTien) VNĐ
+        </td>
+    </tr>
+</table>
+
+<!-- Link Trở về giỏ hàng -->
+<table align="center" style="width: 80%; margin-top: 20px;">
+    <tr style="text-align:right;">
+        <td>
+            @Html.ActionLink("<< TRỞ VỀ GIỎ HÀNG", "GioHang", "GioHang", null, new { style = "color: blue; font-weight: bold; text-decoration: none;" })
+        </td>
+    </tr>
+</table>
+
+<!-- Thông tin khách hàng -->
+<h2 style="text-align:center; margin-top: 30px;">THÔNG TIN KHÁCH HÀNG</h2>
+@{
+    var kh = (TaiKhoan)Session["User"];
+}
+
+@using (Html.BeginForm())
+{
+    <table align="center" style="width: 80%; margin-top: 20px;">
+        @Html.ValidationSummary(true)
+
+        <tr>
+            <td style="width: 30%;">Họ tên khách hàng:</td>
+            <td>
+                <input type="text" name="HoTen" value="@kh.HoTen" required style="width: 100%; padding: 5px;" />
+            </td>
+        </tr>
+        <tr>
+            <td>Địa chỉ:</td>
+            <td>
+                <textarea name="DiaChi" required style="width: 100%; padding: 5px; height: 60px;">@kh.DiaChi</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Điện thoại:</td>
+            <td>
+                <input type="tel" name="DienThoai" value="@kh.SoDienThoai" required style="width: 100%; padding: 5px;" />
+            </td>
+        </tr>
+        <tr>
+            <td>Ngày đặt:</td>
+            <td style="font-weight:bold;">@DateTime.Now.ToShortDateString()</td>
+        </tr>
+    </table>
+
+    <!-- Hình thức thanh toán -->
+    <h2 style="text-align:center; margin-top: 30px;">HÌNH THỨC THANH TOÁN</h2>
+    <div align="center" style="width: 80%; margin-bottom: 20px;">
+        <fieldset style="border: 1px solid #ccc; padding: 10px;">
+            <legend style="font-weight: bold; color: blue;">Chọn hình thức thanh toán</legend>
+            <table style="width: 100%;">
+                <tr>
+                    <td><input type="radio" checked value="nhanhang" name="thanhtoan" /></td>
+                    <td>Thanh toán khi nhận hàng</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" value="vivnpay" name="thanhtoan" /></td>
+                    <td>Thanh toán qua ví VNPay</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <!-- Nút ĐẶT HÀNG -->
+    <div style="text-align: center; margin-top: 20px;">
+        <input type="submit" value="ĐẶT HÀNG" style="background-color: #28a745; color: white; font-size: 18px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" />
+    </div>
+}
+
+<!-- JavaScript xác nhận form -->
+<script>
+    document.querySelector("form").onsubmit = function () {
+        var name = document.getElementsByName("HoTen")[0].value;
+        var phone = document.getElementsByName("DienThoai")[0].value;
+
+        if (!name || !phone) {
+            alert("Vui lòng nhập đầy đủ họ tên và số điện thoại!");
+            return false;
+        }
+        return true;
+    };
+</script>
+<script>
+    var seconds = 120; // 120 giây
+    var countdownElement = document.createElement("div");
+    countdownElement.style.position = "fixed";
+    countdownElement.style.bottom = "20px";
+    countdownElement.style.right = "20px";
+    countdownElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+    countdownElement.style.color = "white";
+    countdownElement.style.padding = "10px 15px";
+    countdownElement.style.borderRadius = "8px";
+    countdownElement.style.fontSize = "16px";
+    countdownElement.style.zIndex = "9999";
+    document.body.appendChild(countdownElement);
+
+    function updateCountdown() {
+        countdownElement.innerText = "Bạn sẽ được chuyển về trang chủ sau " + seconds + " giây.";
+        seconds--;
+
+        if (seconds < 0) {
+            clearInterval(timer);
+            alert("Bạn đã chờ quá lâu. Hệ thống sẽ tự động quay về trang chủ.");
+            window.location.href = '@Url.Action("Index", "Home")';
+        }
+    }
+
+    var timer = setInterval(updateCountdown, 1000); // Cập nhật mỗi 1 giây
+    updateCountdown(); // Gọi ngay lần đầu
+
+    // Hủy nếu form được submit
+    document.querySelector("form").onsubmit = function () {
+        clearInterval(timer); // Hủy đếm ngược
+        var name = document.getElementsByName("HoTen")[0].value;
+        var phone = document.getElementsByName("DienThoai")[0].value;
+
+        if (!name || !phone) {
+            alert("Vui lòng nhập đầy đủ họ tên và số điện thoại!");
+            return false;
+        }
+        return true;
+    };
+</script>
+

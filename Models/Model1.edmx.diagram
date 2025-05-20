@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="11a783bf21c74de7ac0f4c37426e445e" Name="Diagram1">
+        <EntityTypeShape EntityType="WebBanHangModel.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanHangModel.DanhGia" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanHangModel.DanhMuc" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanHangModel.DonHang" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanHangModel.GioHang" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanHangModel.SanPham" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanHangModel.TaiKhoan" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanHangModel.ThanhToan" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="WebBanHangModel.FK__ChiTietDo__IdDon__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanHangModel.FK__ChiTietDo__IdSan__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanHangModel.FK__DanhGia__IdNguoi__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanHangModel.FK__DanhGia__IdSanPh__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanHangModel.FK__SanPham__IdDanhM__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanHangModel.FK__DonHang__IdNguoi__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanHangModel.FK__ThanhToan__IdDon__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanHangModel.FK__GioHang__MaNguoi__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanHangModel.FK__GioHang__MaSanPh__5EBF139D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

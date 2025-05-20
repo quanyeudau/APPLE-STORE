@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Xác nhận OTP";
+}
+
+<h2>Xác nhận OTP</h2>
+
+<div style="max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+    @using (Html.BeginForm("VerifyOTPInline", "Home", FormMethod.Post))
+    {
+        <div style="margin-bottom: 15px;">
+            <label>Nhập mã OTP đã gửi tới Email:</label>
+            <input type="text" name="otp" class="form-control" style="width: 100%; padding: 8px; margin-top: 5px;" required />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <span id="countdown" style="font-weight: bold; color: #007bff;">05:00</span> để nhập mã
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Xác nhận</button>
+
+        <div style="margin-top: 10px; text-align: center;">
+            <button type="button" id="resendOtpBtn" onclick="resendOtp()" class="btn btn-link" style="text-decoration: none;">Gửi lại OTP</button>
+        </div>
+    }
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p style="color:red; margin-top: 10px;">@ViewBag.ErrorMessage</p>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // Đếm ngược 5 phút
+        var seconds = 300;
+        var countdown = document.getElementById('countdown');
+
+        function updateCountdown() {
+            var minutes = Math.floor(seconds / 60);
+            var secs = seconds % 60;
+            countdown.textContent = (minutes < 10 ? "0" : "") + minutes + ":" + (secs < 10 ? "0" : "") + secs;
+            if (seconds > 0) {
+                seconds--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                countdown.textContent = "Hết thời gian!";
+            }
+        }
+
+        updateCountdown();
+
+        function resendOtp() {
+            fetch('@Url.Action("ResendOTP", "Account")', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Đã gửi lại OTP!");
+                        seconds = 300; // Reset lại 5 phút
+                        updateCountdown();
+                    } else {
+                        alert("Không thể gửi lại OTP. Vui lòng thử lại sau.");
+                    }
+                });
+        }
+    </script>
+}

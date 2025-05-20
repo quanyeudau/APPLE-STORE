@@ -1,0 +1,4 @@
+12/19/2024 9:43:57 AM - An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at APPLE_STORE.Controllers.HomeController.Register(TaiKhoan model) in C:\Users\ACER\Documents\Zalo Received Files\APPLE STORE\APPLE STORE\Controllers\HomeController.cs:line 262
+

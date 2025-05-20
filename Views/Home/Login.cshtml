@@ -1,0 +1,40 @@
+﻿@model APPLE_STORE.Models.TaiKhoan
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow p-4" style="width: 400px; border-radius: 15px;">
+        @if (ViewBag.LoginError != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.LoginError
+            </div>
+        }
+        <h2 class="text-center mb-4">Đăng nhập</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group mb-3">
+                <label for="TenTaiKhoan" class="form-label">Tên đăng nhập</label>
+                @Html.TextBoxFor(m => m.TenTaiKhoan, new { @class = "form-control", @placeholder = "Nhập tên đăng nhập" })
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="MatKhau" class="form-label">Mật khẩu</label>
+                @Html.PasswordFor(m => m.MatKhau, new { @class = "form-control", @placeholder = "Nhập mật khẩu" })
+            </div>
+
+            <div class="form-group mb-4 text-center">
+                <div class="g-recaptcha d-inline-block" data-sitekey="6LeNFiYrAAAAABNwdI6Q3DrWbcNk20FYyPjasZj5"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" style="background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); border: none;">Đăng nhập</button>
+        }
+    </div>
+</div>
+
+<!-- Script reCAPTCHA v2 -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
